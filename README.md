@@ -1,4 +1,4 @@
-### Federated Learning implementation using Flower
+### Federated Learning implementation using Flower Framework
 This repository is created to test out the Flower library and understand how federated learning works. 
 
 Implementation details:
