@@ -1,0 +1,65 @@
+# to load image from docker to minikube I used the following command
+minikube image load flower-sklearn:1.1.0
+
+# How to run the test.
+I need to define a container/target port 8080.
+Expose the deployment via a node port service
+Use the service endpoint as server ip address and port
+Run 3 containers one for server and 2 for clients. 
+
+# Used following command to create server deployment
+kubectl create deployment flserver --image=flower-sklearn:1.1.0 --port=8080 --dry-run -oyaml -- sh -c 'sleep 5000' > flower-sklearn-deployment.yaml
+
+# Used following command to expose the deployment
+kubectl expose deployment.apps/flserver --type=NodePort --target-port=8080 --port=8080 --dry-run -oyaml > flserver-svc.yaml
+
+# I need to repeat this 2 more times to get clients running
+
+# Used following command to create client1 deployment
+kubectl create deployment flclient1 --image=flower-sklearn:1.1.0 --port=8080 --dry-run -oyaml -- sh -c 'sleep 5000' > flower-sklearn-client1-deployment.yaml
+
+# Used following command to expose the deployment
+kubectl expose deployment.apps/flclient1 --type=NodePort --target-port=8080 --port=8080 --dry-run -oyaml > flserver-svc-client1.yaml
+
+# Used following command to create client2 deployment
+kubectl create deployment flclient2 --image=flower-sklearn:1.1.0 --port=8080 --dry-run -oyaml -- sh -c 'sleep 5000' > flower-sklearn-client2-deployment.yaml
+
+# Used following command to expose the deployment
+kubectl expose deployment.apps/flclient2 --type=NodePort --target-port=8080 --port=8080 --dry-run -oyaml > flserver-svc-client2.yaml
+
+
+# next exec into each container and stepup server ip. My server service ip is 10.101.252.168.... I had to use the container ip instead of service ip to make the file setup work.
+
+# Hence every thing is ready to go. 
+
+# for demo purposes I want to create three windows showing the transaction. 
+
+# install ping to do test
+
+# the ping failed on service but succeeded on container ip address. 
+
+
+# applying CA certificates to enable secure communication
+generate certificates using given script. 
+copy the location into the searver file. And do the same in the client 1 and 2 containers.
+/flower/examples/advanced-tensorflow/.cache/certificates
+
+
+# mount local path to minikube by using following command. This allows the container config file to be edited outside the container and saved for later.  
+minikube mount C:\\Users\\audd0001\\flower\\:/home/docker/
+
+# To execute the test go to the git hub repo and bring out the execution commands. The configurations for server and client are already created. 
+# the instruction are here. But first exec into containers. 
+https://github.com/adap/flower/tree/main/examples/sklearn-logreg-mnist
+
+# next exec into each container and stepup server ip. My server service ip is 10.101.252.168.... Well after the config is brought out you need to update the ip in files. 
+# in the server container 
+poetry run python3 server.py
+
+
+# in the client 1 container. 
+python3 client.py --node-id 1
+
+# in the client 2 container. 
+python3 client.py --node-id 2
+
