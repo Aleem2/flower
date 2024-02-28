@@ -1,3 +1,4 @@
+# line 3 can be improved to reduce container size. 
 FROM python:3.8
 RUN git clone --depth=1 https://github.com/adap/flower.git
 RUN pip install poetry
@@ -8,3 +9,4 @@ WORKDIR /flower/examples/sklearn-logreg-mnist
 RUN apt update 
 RUN apt install vim -y
 RUN apt install iputils-ping -y
+
