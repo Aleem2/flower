@@ -1,3 +1,6 @@
+# build docker image
+docker build -t flower:1.1.0 .
+
 # to load image from docker to minikube I used the following command
 minikube image load flower-sklearn:1.1.0
 
@@ -8,24 +11,24 @@ Use the service endpoint as server ip address and port
 Run 3 containers one for server and 2 for clients. 
 
 # Used following command to create server deployment
-kubectl create deployment flserver --image=flower-sklearn:1.1.0 --port=8080 --dry-run -oyaml -- sh -c 'sleep 5000' > flower-sklearn-deployment.yaml
+kubectl create deployment flserver --image=flower-sklearn:1.1.0 --port=8080 --dry-run -oyaml -- sh -c 'sleep 5000' > flower-sklearn-deployment.yaml (Done)
 
 # Used following command to expose the deployment
-kubectl expose deployment.apps/flserver --type=NodePort --target-port=8080 --port=8080 --dry-run -oyaml > flserver-svc.yaml
+kubectl expose deployment.apps/flserver --type=NodePort --target-port=8080 --port=8080 --dry-run -oyaml > flserver-svc.yaml (Done)
 
 # I need to repeat this 2 more times to get clients running
 
 # Used following command to create client1 deployment
-kubectl create deployment flclient1 --image=flower-sklearn:1.1.0 --port=8080 --dry-run -oyaml -- sh -c 'sleep 5000' > flower-sklearn-client1-deployment.yaml
+kubectl create deployment flclient1 --image=flower-sklearn:1.1.0 --port=8080 --dry-run -oyaml -- sh -c 'sleep 5000' > flower-sklearn-client1-deployment.yaml (Done)
 
 # Used following command to expose the deployment
-kubectl expose deployment.apps/flclient1 --type=NodePort --target-port=8080 --port=8080 --dry-run -oyaml > flserver-svc-client1.yaml
+kubectl expose deployment.apps/flclient1 --type=NodePort --target-port=8080 --port=8080 --dry-run -oyaml > flserver-svc-client1.yaml (done)
 
 # Used following command to create client2 deployment
-kubectl create deployment flclient2 --image=flower-sklearn:1.1.0 --port=8080 --dry-run -oyaml -- sh -c 'sleep 5000' > flower-sklearn-client2-deployment.yaml
+kubectl create deployment flclient2 --image=flower-sklearn:1.1.0 --port=8080 --dry-run -oyaml -- sh -c 'sleep 5000' > flower-sklearn-client2-deployment.yaml (Done)
 
 # Used following command to expose the deployment
-kubectl expose deployment.apps/flclient2 --type=NodePort --target-port=8080 --port=8080 --dry-run -oyaml > flserver-svc-client2.yaml
+kubectl expose deployment.apps/flclient2 --type=NodePort --target-port=8080 --port=8080 --dry-run -oyaml > flserver-svc-client2.yaml (Done)
 
 
 # next exec into each container and stepup server ip. My server service ip is 10.101.252.168.... I had to use the container ip instead of service ip to make the file setup work.
