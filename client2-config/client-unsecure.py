@@ -63,4 +63,4 @@ if __name__ == "__main__":
             return loss, len(X_test), {"accuracy": accuracy}
 
     # Start Flower client
-    fl.client.start_numpy_client(server_address="172.17.0.17:8080", client=MnistClient()) # do not mention root_certificate details to have insecure communication.
+    fl.client.start_numpy_client(server_address="172.17.0.20:8080", client=MnistClient()) # do not mention root_certificate details to have insecure communication.
