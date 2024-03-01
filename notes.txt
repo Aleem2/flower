@@ -63,6 +63,15 @@ poetry run python3 server.py
 # in the client 1 container. 
 python3 client.py --node-id 1
 
+
+or 
+
+python3 client-unsecure.py --node-id 2
+
 # in the client 2 container. 
 python3 client.py --node-id 2
+
+or 
+
+python3 client-unsecure.py --node-id 2
 

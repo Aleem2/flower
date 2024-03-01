@@ -42,12 +42,12 @@ if __name__ == "__main__":
         on_fit_config_fn=fit_round,
     )
     fl.server.start_server(
-        server_address="172.17.0.7:8080",
-        certificates=(
-            Path("ca.crt").read_bytes(),
-            Path("server.pem").read_bytes(),
-            Path("server.key").read_bytes(),
-        ),    # comment this line to have insecure communication!
+        server_address="172.17.0.17:8080",
+        #certificates=(
+        #    Path("ca.crt").read_bytes(),
+        #    Path("server.pem").read_bytes(),
+        #    Path("server.key").read_bytes(),
+        #),    # comment this line to have insecure communication!
         strategy=strategy,
         config=fl.server.ServerConfig(num_rounds=5),
     )
