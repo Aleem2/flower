@@ -11,7 +11,7 @@ Use the service endpoint as server ip address and port
 Run 3 containers one for server and 2 for clients. 
 
 # Used following command to create server deployment
-kubectl create deployment flserver --image=flower-sklearn:1.1.0 --port=8080 --dry-run -oyaml -- sh -c 'sleep 5000' > flower-sklearn-deployment.yaml (Done)
+kubectl create deployment flserver --image=flower-sklearn:1.1.1 --port=8080 --dry-run -oyaml -- sh -c 'sleep 5000' > flower-sklearn-deployment.yaml (Done)
 
 # Used following command to expose the deployment
 kubectl expose deployment.apps/flserver --type=NodePort --target-port=8080 --port=8080 --dry-run -oyaml > flserver-svc.yaml (Done)

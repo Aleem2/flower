@@ -1,0 +1,67 @@
+Pre-requisites 
+1. running minikube or similar implementation
+2. docker
+
+
+Steps:
+
+
+
+1. start minikube 
+# minikube start
+
+
+
+2. minikube requires the file directory to be loaded for the configurations. 
+# mount local path to minikube by using following command. This allows the container config file to be edited outside the container and saved for later.  
+minikube mount C:\\Users\\audd0001\\flower\\:/home/docker/
+
+3. Build the image using the docker file and tag it as flower-sklearn:1.1.1
+# build docker image
+docker build -t flower:1.1.1 .
+
+# to load image from docker to minikube I used the following command
+minikube image load flower-sklearn:1.1.1
+
+
+4. create server, client1 and client2 by applying the deployments.
+# kubectl create -f flower-sklearn-client1-deployment.yaml
+# kubectl create -f flower-sklearn-client2-deployment.yaml
+# kubectl create -f flower-sklearn-server-deployment.yaml
+# kubectl create -f flserver-svc-client2.yaml
+# kubectl create -f flserver-svc-client1.yaml
+# kubectl create -f flserver-svc.yaml
+
+
+
+5. Exec into server pod and create certificates using the script assigning server's service ip. 
+use the generate.sh file with appropriate certificate.conf file. 
+
+6. If using istio service mesh use server-unsecure.py file with proper server ip. Exec into each container and start the flower learning using the following commands. 
+# in the server container 
+poetry run python3 server.py # using certificate
+
+or
+poetry run python3 server-unsecure.py # using service mesh
+
+
+# in the client 1 container. 
+python3 client.py --node-id 1 # using certificate
+
+
+or 
+
+python3 client-unsecure.py --node-id 1 # using service mesh
+
+# in the client 2 container. 
+python3 client.py --node-id 2 # using certificate
+
+or 
+
+python3 client-unsecure.py --node-id 2 # using service mesh
+
+
+
+
+
+

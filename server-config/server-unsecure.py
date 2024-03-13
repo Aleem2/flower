@@ -42,7 +42,7 @@ if __name__ == "__main__":
         on_fit_config_fn=fit_round,
     )
     fl.server.start_server(
-        server_address="172.17.0.20:8080",
+        server_address="172.17.0.18:8080", 
         #certificates=(
         #    Path("ca.crt").read_bytes(),
         #    Path("server.pem").read_bytes(),
