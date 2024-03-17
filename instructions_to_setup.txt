@@ -35,7 +35,7 @@ minikube image load flower-sklearn:1.1.1
 
 
 5. Exec into server pod and create certificates using the script assigning server's service ip. 
-use the generate.sh file with appropriate certificate.conf file. 
+use the generate.sh file wi1th appropriate certificate.conf file. 
 
 6. If using istio service mesh use server-unsecure.py file with proper server ip. Exec into each container and start the flower learning using the following commands. 
 # in the server container 
@@ -51,7 +51,7 @@ python3 client.py --node-id 1 # using certificate
 
 or 
 
-python3 client-unsecure.py --node-id 1 # using service mesh
+1 # using service mesh
 
 # in the client 2 container. 
 python3 client.py --node-id 2 # using certificate

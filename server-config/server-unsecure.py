@@ -51,3 +51,4 @@ if __name__ == "__main__":
         strategy=strategy,
         config=fl.server.ServerConfig(num_rounds=5),
     )
+
